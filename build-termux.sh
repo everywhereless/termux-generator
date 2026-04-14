@@ -127,7 +127,7 @@ while (($# > 0)); do
                 exit 1
             fi
             ;;
-		--architectures)
+        --architectures)
             if [ $# -gt 1 ] && [ -n "$2" ] && [[ $2 != -* ]]; then
                 BOOTSTRAP_ARCHITECTURES="$2"
                 shift 1

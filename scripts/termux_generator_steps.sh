@@ -201,15 +201,15 @@ build_bootstraps() {
         scripts/free-space.sh
     fi
 
-	# Replace symbolic link /system which is inside the termux-package-builder docker image
-	# pointed to /data/data/com.termux/aosp by default
-	# https://github.com/termux/termux-packages/blob/650907de80114cc53b20b181161f993e3ad0dfad/scripts/setup-ubuntu.sh#L371
-	# needed for building pypy and similar packages
-	scripts/run-docker.sh sudo ln -sf "/data/data/$TERMUX_APP__PACKAGE_NAME/aosp" /system
+    # Replace symbolic link /system which is inside the termux-package-builder docker image
+    # pointed to /data/data/com.termux/aosp by default
+    # https://github.com/termux/termux-packages/blob/650907de80114cc53b20b181161f993e3ad0dfad/scripts/setup-ubuntu.sh#L371
+    # needed for building pypy and similar packages
+    scripts/run-docker.sh sudo ln -sf "/data/data/$TERMUX_APP__PACKAGE_NAME/aosp" /system
 
-	if [[ "$TERMUX_APP_TYPE" == "f-droid" && "$TERMUX_APP__PACKAGE_NAME" == "com.retired64.termux" && $bootstrap_architectures != *","* ]]; then
-		build_all_packages "$bootstrap_architectures"
-	fi
+    if [[ "$TERMUX_APP_TYPE" == "f-droid" && "$TERMUX_APP__PACKAGE_NAME" == "com.retired64.termux" && $bootstrap_architectures != *","* ]]; then
+        build_all_packages "$bootstrap_architectures"
+    fi
 
     scripts/run-docker.sh "scripts/$bootstrap_script" $bootstrap_script_args
 
