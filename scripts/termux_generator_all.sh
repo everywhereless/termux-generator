@@ -42,7 +42,7 @@ build_all_packages() {
         BUILDLOG_FILE="$BUILDSTATUS_DIR/$PKG.log"
 
         TIER=3
-        export CONTAINER_NAME="termux-generator-package-builder"
+        export CONTAINER_NAME="$TERMUX_GENERATOR_CONTAINER_NAME"
 
         echo "===============" | tee -a "$BUILDLOG_FILE"
         echo "Building $PKG at tier $TIER..." | tee -a "$BUILDLOG_FILE"
@@ -59,7 +59,7 @@ build_all_packages() {
         echo "failed tier $TIER" >> "$BUILDSTATUS_FILE"
 
         TIER=2
-        export CONTAINER_NAME="tier-$TIER-termux-generator-package-builder"
+        export CONTAINER_NAME="tier-$TIER-$TERMUX_GENERATOR_CONTAINER_NAME"
         docker container kill $CONTAINER_NAME
         docker container rm $CONTAINER_NAME
         # Replace symbolic link /system which is inside the termux-package-builder docker image
